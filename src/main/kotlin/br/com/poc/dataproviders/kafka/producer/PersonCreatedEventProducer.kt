@@ -1,7 +1,7 @@
 package br.com.poc.dataproviders.kafka.producer
 
 import br.com.poc.PersonCreated
-import br.com.poc.core.models.person.Person
+import br.com.poc.core.models.Person
 import br.com.poc.core.usecases.person.PersonProducerEvent
 import org.apache.kafka.common.header.internals.RecordHeader
 import org.apache.kafka.common.header.internals.RecordHeaders

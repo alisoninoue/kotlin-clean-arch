@@ -1,4 +1,4 @@
-package br.com.poc.core.models.person
+package br.com.poc.core.models
 
 data class Person(
     val cpf: Long,

@@ -1,7 +1,7 @@
 package br.com.poc.dataproviders
 
 import br.com.poc.core.dataproviders.PersonRepository
-import br.com.poc.core.models.person.Person
+import br.com.poc.core.models.Person
 import br.com.poc.dataproviders.entities.PersonEntity
 import io.micronaut.data.annotation.Repository
 import io.micronaut.transaction.annotation.ReadOnly

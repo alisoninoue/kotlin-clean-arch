@@ -5,7 +5,7 @@ import assertk.assertions.hasMessage
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFailure
 import br.com.poc.core.dataproviders.PersonRepository
-import br.com.poc.core.models.person.Person
+import br.com.poc.core.models.Person
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test

@@ -1,7 +1,7 @@
 package br.com.poc.entrypoints.grpc
 
 import br.com.poc.PersonDetails
-import br.com.poc.core.models.person.Person
+import br.com.poc.core.models.Person
 import br.com.poc.core.usecases.person.PersonGetterUseCase
 import br.com.poc.core.usecases.person.PersonRegisterUseCase
 import io.micronaut.tracing.annotation.ContinueSpan

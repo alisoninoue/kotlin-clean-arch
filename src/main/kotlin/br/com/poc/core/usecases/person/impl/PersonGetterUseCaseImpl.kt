@@ -2,7 +2,7 @@ package br.com.poc.core.usecases.person.impl
 
 import br.com.poc.core.dataproviders.PersonRepository
 import br.com.poc.core.exceptions.PersonNotFoundException
-import br.com.poc.core.models.person.Person
+import br.com.poc.core.models.Person
 import br.com.poc.core.usecases.person.PersonGetterUseCase
 
 class PersonGetterUseCaseImpl(private val repository: PersonRepository) :
