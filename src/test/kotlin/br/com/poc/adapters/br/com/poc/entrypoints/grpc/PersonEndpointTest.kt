@@ -5,7 +5,7 @@ import assertk.assertions.isIn
 import br.com.poc.PersonReply
 import br.com.poc.PersonRequest
 import br.com.poc.entrypoints.grpc.PersonEndpoint
-import br.com.poc.entrypoints.grpc.PersonSpringService
+import br.com.poc.entrypoints.grpc.PersonMicronautService
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test
 class PersonEndpointTest {
     @Test
     internal fun `should create new person`() {
-        val service = mockk<PersonSpringService>()
+        val service = mockk<PersonMicronautService>()
 
         val reply = PersonReply.newBuilder().setMessage("Person created!").build()
         val request = PersonRequest.newBuilder()

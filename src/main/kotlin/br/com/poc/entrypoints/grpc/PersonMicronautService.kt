@@ -11,7 +11,7 @@ import javax.inject.Singleton
 import javax.transaction.Transactional
 
 @Singleton
-open class PersonSpringService(
+open class PersonMicronautService(
     private val personRegisterUseCase: PersonRegisterUseCase,
     private val personGetterUseCase: PersonGetterUseCase
 ) : PersonService {
