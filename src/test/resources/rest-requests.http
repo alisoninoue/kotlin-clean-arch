@@ -1,4 +1,4 @@
-GET http://localhost:8080/people/4114
+GET http://localhost:8080/people/
 Accept: application/json
 
 <> 2021-04-02T092918.200.json
@@ -8,6 +8,15 @@ POST http://localhost:8080/people
 Content-Type: application/json
 
 {
-  "cpf": 12345,
-  "name": "content"
+  "cpf": 1234,
+  "name": "asdsad"
+}
+
+###
+POST http://localhost:8080/people
+Content-Type: application/json
+
+{
+  "cpf": -1234,
+  "name": ""
 }

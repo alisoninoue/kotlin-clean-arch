@@ -1,30 +1,52 @@
 package br.com.poc.entrypoints.rest
 
+import br.com.poc.core.exceptions.PersonNotFoundException
 import br.com.poc.core.models.Person
 import br.com.poc.core.usecases.person.PersonGetterUseCase
 import br.com.poc.core.usecases.person.PersonRegisterUseCase
+import br.com.poc.entrypoints.rest.dto.ErrorDto
 import br.com.poc.entrypoints.rest.dto.PersonDto
+import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
+import javax.validation.ConstraintViolationException
+import javax.validation.Valid
+
 
 @Controller("/people")
-class PersonRest(
+open class PersonRest(
     private val personRegisterUseCase: PersonRegisterUseCase,
-    private val personGetterUseCase: PersonGetterUseCase
+    private val personGetterUseCase: PersonGetterUseCase,
+    private val messageSource: MessageSource
 ) {
 
     @Get("/{cpf}")
-    fun findByCpf(cpf: Long): HttpResponse<*> {
+    open fun findByCpf(cpf: Long): HttpResponse<*> {
         val personDto = personGetterUseCase.findById(cpf).toDto()
         return HttpResponse.ok(personDto)
     }
 
-    @Consumes(MediaType.APPLICATION_JSON)
     @Post
-    fun save(@Body person: PersonDto): HttpResponse<*> {
-        personRegisterUseCase.registerPerson(person.toDomain())
-        return HttpResponse.ok("")
+    open fun save(@Valid @Body person: PersonDto): HttpResponse<PersonDto> {
+        val personDto = personRegisterUseCase.registerPerson(person.toDomain()).toDto()
+        return HttpResponse.created(personDto)
+    }
+
+    @Error(exception = PersonNotFoundException::class)
+    fun notFoundErrorHandler(
+        request: HttpRequest<*>?,
+        exception: PersonNotFoundException
+    ): HttpResponse<*> {
+        return HttpResponse.notFound(exception.message)
+    }
+
+    @Error(exception = ConstraintViolationException::class)
+    fun constraintViolationErrorHandler(
+        request: HttpRequest<*>?,
+        exception: ConstraintViolationException
+    ): HttpResponse<ErrorDto> {
+        val errorDto = ErrorDto(messageSource.violationsMessages(exception.constraintViolations))
+        return HttpResponse.badRequest(errorDto)
     }
 
     private fun Person.toDto(): PersonDto {

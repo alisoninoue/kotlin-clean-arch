@@ -35,9 +35,7 @@ configurations.all {
 }
 
 dependencies {
-    //kapt(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
     kapt("io.micronaut:micronaut-inject-java")
-    kapt("io.micronaut:micronaut-validation")
     kapt("io.micronaut.data:micronaut-data-processor")
     kaptTest("io.micronaut:micronaut-inject-java")
 
@@ -71,6 +69,8 @@ dependencies {
     implementation("io.micronaut:micronaut-http-server-netty")
     implementation("io.micronaut:micronaut-http-client")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    kapt("io.micronaut:micronaut-validation")
+    implementation("io.micronaut:micronaut-validation")
 
     // Observability
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
@@ -87,7 +87,6 @@ dependencies {
     testCompile("com.willowtreeapps.assertk:assertk-jvm:0.23.1")
     testRuntime("org.jetbrains.spek:spek-junit-platform-engine:1.1.5")
     pitest('org.pitest:pitest-junit5-plugin:0.14')
-
 }
 
 test.classpath += configurations.developmentOnly
@@ -99,6 +98,7 @@ allOpen {
     annotation("javax.persistence.Entity")
     annotation("javax.persistence.Embeddable")
     annotation("javax.persistence.MappedSuperclass")
+    annotation("io.micronaut.validation.Validated")
 }
 noArg {
     annotation("javax.persistence.Entity")

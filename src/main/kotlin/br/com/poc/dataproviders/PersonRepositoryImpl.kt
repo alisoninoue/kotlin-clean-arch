@@ -11,8 +11,8 @@ import javax.transaction.Transactional
 @Repository
 open class PersonRepositoryImpl(private val jpaRepository: PersonJpaRepository) : PersonRepository {
     @Transactional
-    override fun register(person: Person) {
-        jpaRepository.save(person.toEntity())
+    override fun register(person: Person) : Person {
+        return jpaRepository.save(person.toEntity()).toDomain()
     }
 
     @ReadOnly

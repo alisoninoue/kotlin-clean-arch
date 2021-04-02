@@ -9,11 +9,12 @@ import br.com.poc.core.usecases.person.PersonRegisterUseCase
 class PersonRegisterUseCaseImpl(private val repository: PersonRepository, private val producer: PersonProducerEvent) :
     PersonRegisterUseCase {
 
-    override fun registerPerson(person: Person) {
+    override fun registerPerson(person: Person) : Person {
         repository.findBy(person.cpf)
             .ifPresent { throw InvalidArgumentException("Person ${person.cpf} already exists!") }
         repository.register(person)
 
         producer.sendEventPersonCreated(person)
+        return person
     }
 }
