@@ -17,6 +17,6 @@ open class UseCasesConfig {
         PersonGetterUseCaseImpl(personRepository)
 
     @Singleton
-    open fun loadUseCase(personRepository: PersonRepository, personProducerEvent: PersonProducerEvent): PersonRegisterUseCase =
+    open fun loadRegisterUseCase(personRepository: PersonRepository, personProducerEvent: PersonProducerEvent): PersonRegisterUseCase =
         PersonRegisterUseCaseImpl(personRepository, personProducerEvent)
 }
