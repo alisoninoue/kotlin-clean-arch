@@ -111,6 +111,13 @@ compileKotlin {
     }
 }
 
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = '11'
+        javaParameters = true
+    }
+}
+
 tasks.withType(JavaExec) {
     classpath += configurations.developmentOnly
     jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
@@ -126,7 +133,7 @@ sourceSets {
     }
 }
 
-//apply from: "$rootDir/integration-test.gradle"
+apply from: "$rootDir/integration-test.gradle"
 
 tasks {
     protobuf {
@@ -189,6 +196,7 @@ tasks {
         mainSourceSets.set([sourceSets.main])
         testSourceSets.set([sourceSets.test])
     }
+//    check.dependsOn "jacocoTestCoverageVerification"
 //    check.dependsOn "pitest"
 }
 

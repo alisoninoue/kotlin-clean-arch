@@ -12,6 +12,13 @@ sourceSets {
     }
 }
 
+compileIntegrationTestKotlin {
+    kotlinOptions {
+        jvmTarget = '11'
+        javaParameters = true
+    }
+}
+
 dependencies {
     integrationTestCompile("org.junit.jupiter:junit-jupiter:$junit5Version")
     kaptIntegrationTest("io.micronaut:micronaut-inject-java:$micronautVersion")
