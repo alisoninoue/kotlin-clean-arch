@@ -1,4 +1,4 @@
-package br.com.poc.adapters.endpoint
+package br.com.poc.adapters.br.com.poc.entrypoints.grpc
 
 import assertk.assertThat
 import assertk.assertions.isIn
@@ -9,10 +9,8 @@ import br.com.poc.entrypoints.grpc.PersonSpringService
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
-@Disabled
 class PersonEndpointTest {
     @Test
     internal fun `should create new person`() {
