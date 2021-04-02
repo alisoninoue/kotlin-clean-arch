@@ -1,9 +1,8 @@
 package br.com.poc.dataproviders
 
 import br.com.poc.core.dataproviders.PersonRepository
-import br.com.poc.core.entity.person.Person
+import br.com.poc.core.models.person.Person
 import br.com.poc.dataproviders.entities.PersonEntity
-import io.micronaut.context.annotation.Prototype
 import io.micronaut.data.annotation.Repository
 import io.micronaut.transaction.annotation.ReadOnly
 import java.util.*

@@ -1,10 +1,9 @@
 package br.com.poc.application.services
 
 import br.com.poc.PersonCreated
-import br.com.poc.entrypoints.kafka.producer.PersonProducer
-import br.com.poc.dataproviders.entities.PersonEntity
 import br.com.poc.dataproviders.PersonJpaRepository
-import br.com.poc.entrypoints.grpc.PersonService
+import br.com.poc.dataproviders.entities.PersonEntity
+import br.com.poc.dataproviders.kafka.producer.PersonKafkaProducer
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -13,11 +12,11 @@ import org.junit.jupiter.api.Test
 import java.util.*
 
 @Disabled
-internal class PersonServiceTest {
+internal class PersonSpringServiceTest {
     @Test
     internal fun name() {
 
-        val producer = mockk<PersonProducer>()
+        val producer = mockk<PersonKafkaProducer>()
         val repository = mockk<PersonJpaRepository>()
 //        val service = PersonService(repository, producer)
 

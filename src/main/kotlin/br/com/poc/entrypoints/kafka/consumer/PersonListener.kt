@@ -15,7 +15,12 @@ open class PersonListener {
 
     @Topic("person-created")
     @ContinueSpan
-    open fun receive(@KafkaKey key: String, event: PersonCreated, headers: MessageHeaders, acknowledgement: Acknowledgement) {
+    open fun receive(
+        @KafkaKey key: String,
+        event: PersonCreated,
+        headers: MessageHeaders,
+        acknowledgement: Acknowledgement
+    ) {
         val s = headers["correlationId"]
         println(s)
         println("Got Person - ${event.getCpf()} + ${event.getName()} by $key")

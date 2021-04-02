@@ -1,7 +1,7 @@
 package br.com.poc.entrypoints.grpc
 
-import br.com.poc.core.usecases.person.InvalidArgumentException
-import br.com.poc.core.usecases.person.PersonNotFoundException
+import br.com.poc.core.exceptions.InvalidArgumentException
+import br.com.poc.core.exceptions.PersonNotFoundException
 import com.google.rpc.Code
 import com.google.rpc.Status
 import io.grpc.StatusException
