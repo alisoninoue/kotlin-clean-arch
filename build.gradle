@@ -45,7 +45,10 @@ dependencies {
     implementation("io.micronaut:micronaut-runtime")
     implementation("javax.annotation:javax.annotation-api")
     implementation("io.micronaut:micronaut-management")
+
+    // Logging
     runtimeOnly("ch.qos.logback:logback-classic:1.2.3")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
 
     // Kafka Avro - Confluent
     compile("io.confluent:kafka-avro-serializer:$confluentVersion")

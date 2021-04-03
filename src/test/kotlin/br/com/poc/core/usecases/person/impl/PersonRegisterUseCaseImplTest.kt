@@ -21,7 +21,7 @@ internal class PersonRegisterUseCaseImplTest {
         val person = Person(1L, "Alison")
 
         every { repository.findBy(person.cpf) } returns Optional.empty()
-        every { repository.register(person) } returns Unit
+        every { repository.register(person) } returns person
         every { producer.sendEventPersonCreated(person) } returns Unit
 
         personRegisterUseCaseImpl.registerPerson(person)
