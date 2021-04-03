@@ -46,6 +46,21 @@ jpa:
           auto: update
         show_sql: true
 
+kafka:
+  bootstrap:
+    servers: ${KAFKA_BOOTSTRAP_SERVERS:`localhost:9092`}
+  schema.registry.url: ${KAFKA_SCHEMA_REGISTRY:`http://localhost:8081`}
+  consumers:
+    default:
+      specific.avro.reader: true
+      enable.auto.commit: false
+      key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+  producers:
+    default:
+      key.serializer: org.apache.kafka.common.serialization.StringSerializer
+      value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+
 # Uncomment to enable service discovery with Consul
 #consul:
 #    client:

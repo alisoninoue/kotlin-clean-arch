@@ -7,6 +7,7 @@ plugins {
     id 'com.google.protobuf' version "${protobufVersion}"
     id "com.github.johnrengelman.shadow" version "6.1.0"
     id 'jacoco'
+    id 'idea'
     id 'info.solidsoft.pitest' version '1.6.0'
     id "com.github.davidmc24.gradle.plugin.avro" version "1.0.0"
 }

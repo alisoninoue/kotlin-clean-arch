@@ -7,8 +7,19 @@ configurations {
 
 sourceSets {
     integrationTest {
-        compileClasspath += sourceSets.main.output + sourceSets.test.output
-        runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+        kotlin {
+            compileClasspath += sourceSets.main.output + sourceSets.test.output
+            runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+            srcDir file('src/integrationTest/kotlin')
+        }
+        resources.srcDir file('src/integrationTest/resources')
+    }
+}
+
+idea {
+    module {
+        testSourceDirs += project.sourceSets.integrationTest.kotlin.srcDirs
+        testSourceDirs += project.sourceSets.integrationTest.resources.srcDirs
     }
 }
 
