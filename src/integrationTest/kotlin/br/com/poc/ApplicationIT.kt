@@ -1,9 +1,11 @@
 package br.com.poc
 
+import assertk.assertThat
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.testcontainers.containers.KafkaContainer
@@ -47,7 +49,8 @@ open class ApplicationIT {
     lateinit var personClient: PersonGrpcKt.PersonCoroutineStub
 
     @Test
-    fun `should call endpoint`() = runBlocking {
+    @Order(1)
+    fun `should create person`() = runBlocking {
         logger.info { "Kafka Docker is running - ${kafka.isRunning}" }
         Assertions.assertEquals(
             "Person created!",
@@ -58,5 +61,23 @@ open class ApplicationIT {
                     .build()
             ).message
         )
+    }
+
+    @Test
+    @Order(2)
+    fun `should find a person`() {
+        var personDetails: PersonDetails
+        runBlocking {
+            personDetails = personClient.findById(
+                PersonIdRequest.newBuilder()
+                    .setCpf(12345678901L)
+                    .build()
+            )
+        }
+        val expectedPersonDetails = PersonDetails.newBuilder()
+            .setCpf(12345678901L)
+            .setName("Alison")
+            .build()
+        assertThat(personDetails).equals(expectedPersonDetails)
     }
 }
