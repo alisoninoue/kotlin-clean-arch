@@ -14,18 +14,12 @@ class MessageSource {
 
     private fun violationMessage(violation: ConstraintViolation<*>): String {
         val sb = StringBuilder()
-        val lastNode: Path.Node? = lastNode(violation.propertyPath)
+        val lastNode: Path.Node? = violation.propertyPath.last()
         if (lastNode != null) {
             sb.append(lastNode.name)
             sb.append(" ")
         }
         sb.append(violation.message)
         return sb.toString()
-    }
-
-    private fun lastNode(path: Path): Path.Node? {
-        return path.findLast { p ->
-            return@lastNode p
-        }
     }
 }

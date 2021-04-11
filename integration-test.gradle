@@ -1,8 +1,7 @@
 configurations {
-    integrationTestCompileOnly.extendsFrom testCompile
+    integrationTestCompileOnly.extendsFrom testCompileOnly
     integrationTestImplementation.extendsFrom testImplementation
-    integrationTestRuntimeOnly.extendsFrom runtimeOnly
-    integrationTestRuntimeClasspath.extendsFrom testRuntime
+    integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
 sourceSets {
@@ -31,12 +30,11 @@ compileIntegrationTestKotlin {
 }
 
 dependencies {
-    integrationTestCompile("org.junit.jupiter:junit-jupiter:$junit5Version")
     kaptIntegrationTest("io.micronaut:micronaut-inject-java:$micronautVersion")
     integrationTestImplementation("org.testcontainers:testcontainers:1.15.2")
-    integrationTestCompile("org.testcontainers:postgresql:1.15.2")
-    integrationTestCompile("org.testcontainers:kafka:1.15.2")
-    integrationTestCompile("org.testcontainers:junit-jupiter:1.15.2")
+    integrationTestImplementation("org.testcontainers:postgresql:1.15.2")
+    integrationTestImplementation("org.testcontainers:kafka:1.15.2")
+    integrationTestImplementation("org.testcontainers:junit-jupiter:1.15.2")
 }
 
 task integrationTest(type: Test) {

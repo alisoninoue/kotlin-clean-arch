@@ -37,7 +37,7 @@ open class PersonRest(
         request: HttpRequest<*>?,
         exception: PersonNotFoundException
     ): HttpResponse<*> {
-        return HttpResponse.notFound(exception.message)
+        return HttpResponse.notFound("${exception.message} Request: $request")
     }
 
     @Error(exception = ConstraintViolationException::class)
@@ -45,7 +45,8 @@ open class PersonRest(
         request: HttpRequest<*>?,
         exception: ConstraintViolationException
     ): HttpResponse<ErrorDto> {
-        val errorDto = ErrorDto(messageSource.violationsMessages(exception.constraintViolations))
+        val body = request?.body?.get()
+        val errorDto = ErrorDto(body, messageSource.violationsMessages(exception.constraintViolations))
         return HttpResponse.badRequest(errorDto)
     }
 

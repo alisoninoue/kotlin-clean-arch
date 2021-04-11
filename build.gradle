@@ -39,6 +39,8 @@ dependencies {
     kapt("io.micronaut:micronaut-inject-java")
     kapt("io.micronaut.data:micronaut-data-processor")
     kaptTest("io.micronaut:micronaut-inject-java")
+    kaptTest("io.micronaut.data:micronaut-data-processor")
+
 
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
@@ -52,10 +54,10 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
 
     // Kafka Avro - Confluent
-    compile("io.confluent:kafka-avro-serializer:$confluentVersion")
-    compile("io.confluent:kafka-schema-registry:$confluentVersion")
-    compile("io.confluent:kafka-schema-registry-client:$confluentVersion")
-    compile("org.apache.avro:avro:1.10.2")
+    implementation("io.confluent:kafka-avro-serializer:$confluentVersion")
+    compileOnly("io.confluent:kafka-schema-registry:$confluentVersion")
+    compileOnly("io.confluent:kafka-schema-registry-client:$confluentVersion")
+    implementation("org.apache.avro:avro:1.10.2")
     implementation("io.micronaut.kafka:micronaut-kafka")
 
     // Database
@@ -80,7 +82,7 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
     implementation("io.micronaut:micronaut-tracing")
     implementation("io.jaegertracing:jaeger-thrift:1.5.0")
-    runtime("io.opentracing.contrib:opentracing-kafka-client:0.1.15")
+    runtimeOnly("io.opentracing.contrib:opentracing-kafka-client:0.1.15")
 
     // Testing
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
@@ -88,14 +90,14 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit5Version")
     testImplementation("io.micronaut.test:micronaut-test-junit5")
     testImplementation("io.mockk:mockk:$mockkVersion")
-    testCompile("com.willowtreeapps.assertk:assertk-jvm:0.23.1")
-    testRuntime("org.jetbrains.spek:spek-junit-platform-engine:1.1.5")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.23.1")
+    testRuntimeOnly("org.jetbrains.spek:spek-junit-platform-engine:1.1.5")
     pitest('org.pitest:pitest-junit5-plugin:0.14')
 }
 
 test.classpath += configurations.developmentOnly
 
-mainClassName = "br.com.poc.Application"
+mainClassName = "br.com.poc.configuration.Application"
 
 allOpen {
     annotation("io.micronaut.aop.Around")
